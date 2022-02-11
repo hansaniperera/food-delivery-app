@@ -28,6 +28,10 @@ public class User {
     @JsonIgnore
     List<PurchaseHistory> purchaseHistory;
 
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    List<TransactionDetails> transactionDetails;
+
     public Long getId() {
         return id;
     }
@@ -52,11 +56,19 @@ public class User {
         this.cashBalance = cashBalance;
     }
 
-    public List<PurchaseHistory> getPurchaseHistories() {
+    public List<PurchaseHistory> getPurchaseHistory() {
         return purchaseHistory;
     }
 
-    public void setPurchaseHistories(List<PurchaseHistory> purchaseHistories) {
-        this.purchaseHistory = purchaseHistories;
+    public void setPurchaseHistory(List<PurchaseHistory> purchaseHistory) {
+        this.purchaseHistory = purchaseHistory;
+    }
+
+    public List<TransactionDetails> getTransactionDetails() {
+        return transactionDetails;
+    }
+
+    public void setTransactionDetails(List<TransactionDetails> transactionDetails) {
+        this.transactionDetails = transactionDetails;
     }
 }
