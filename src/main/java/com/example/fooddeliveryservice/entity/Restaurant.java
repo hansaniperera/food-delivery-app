@@ -33,7 +33,7 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
-    private List<TransactionDetails> transactionDetails;
+    private List<TransactionDetails> transactionDetail;
 
 
     public Long getId() {
@@ -76,11 +76,11 @@ public class Restaurant {
         this.businessHours = businessHours;
     }
 
-    public List<TransactionDetails> getTransactionDetails() {
-        return transactionDetails;
+    public List<TransactionDetails> getTransactionDetail() {
+        return transactionDetail;
     }
 
-    public void setTransactionDetails(List<TransactionDetails> transactionDetails) {
-        this.transactionDetails = transactionDetails;
+    public void setTransactionDetail(List<TransactionDetails> transactionDetail) {
+        this.transactionDetail = transactionDetail;
     }
 }

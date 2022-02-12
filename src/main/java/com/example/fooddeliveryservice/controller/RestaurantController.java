@@ -5,6 +5,7 @@ import com.example.fooddeliveryservice.dto.RestaurantDto;
 import com.example.fooddeliveryservice.enums.Days;
 import com.example.fooddeliveryservice.enums.Inequality;
 import com.example.fooddeliveryservice.service.RestaurantService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +24,12 @@ public class RestaurantController {
     }
 
     // list of restaurants by open time
-    @GetMapping(value = "")
+    @GetMapping(value = "/open-time")
     public ResponseDto findByOpenTime(@RequestParam(name = "date") Days date,
-            @RequestParam(name = "open_time", required = false) LocalTime openTime,
-            @RequestParam(name = "close_time", required = false) LocalTime closeTime) {
+            @RequestParam(name = "open_time", required = false)
+            @DateTimeFormat(pattern = "HH:mm:ss") LocalTime openTime,
+            @RequestParam(name = "close_time", required = false)
+            @DateTimeFormat(pattern = "HH:mm:ss") LocalTime closeTime) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.setStatusCode(HttpStatus.OK.value());
         responseDto.setError(false);
@@ -35,7 +38,7 @@ public class RestaurantController {
     }
 
     // list of restaurants by price range
-    @GetMapping(value = "")
+    @GetMapping(value = "/price-range")
     public ResponseDto findByPriceRange(@RequestParam(name = "noOfRestaurants") Integer noOfRestaurants,
                                       @RequestParam(name = "noOfDishes", required = false) Integer noOfDishes,
                                       @RequestParam(name = "inequality", required = false) Inequality inequality,
