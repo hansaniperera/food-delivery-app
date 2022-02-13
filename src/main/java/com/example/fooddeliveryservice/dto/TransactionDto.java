@@ -5,25 +5,25 @@ import javax.validation.constraints.NotEmpty;
 public class TransactionDto {
 
     @NotEmpty
-    private Integer restaurantId;
+    private Long restaurantId;
     @NotEmpty
-    private Integer customerId;
+    private Long customerId;
     @NotEmpty
     private Double amount;
 
-    public Integer getRestaurantId() {
+    public Long getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(Integer restaurantId) {
+    public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
     }
 
-    public Integer getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

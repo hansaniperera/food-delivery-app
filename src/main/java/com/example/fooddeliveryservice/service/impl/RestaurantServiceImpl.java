@@ -1,6 +1,5 @@
 package com.example.fooddeliveryservice.service.impl;
 
-import com.example.fooddeliveryservice.dto.MenuDto;
 import com.example.fooddeliveryservice.dto.ResAndMenuDto;
 import com.example.fooddeliveryservice.dto.RestaurantDto;
 import com.example.fooddeliveryservice.entity.MenuProjection;

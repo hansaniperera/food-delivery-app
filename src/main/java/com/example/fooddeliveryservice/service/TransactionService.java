@@ -1,8 +1,11 @@
 package com.example.fooddeliveryservice.service;
 
-import com.example.fooddeliveryservice.entity.TransactionDetails;
+import com.example.fooddeliveryservice.dto.TransactionDto;
+
+import java.sql.SQLException;
+import java.text.ParseException;
 
 public interface TransactionService {
 
-    void performTransaction(TransactionDetails transactionDetails);
+    void performTransaction(TransactionDto transactionDto) throws ParseException, SQLException;
 }

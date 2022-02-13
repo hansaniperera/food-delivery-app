@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "8b5a352a-cfbc-4aa4-b1fb-b8d82d7abc04",
+		"name": "FDA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hansani perera\",\r\n    \"cash_balance\": 100.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "perform-transaction ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerId\": 1,\r\n    \"restaurantId\": 1,\r\n    \"amount\" : 120.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/transaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search-by-dish-or-restaurant",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/restaurant?searchTerm=res",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant"
+					],
+					"query": [
+						{
+							"key": "searchTerm",
+							"value": "res"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-by-price-range",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/restaurant/price-range?noOfRestaurants=2&noOfDishes=2&inequality=LESS&minPrice=10.00&maxPrice=100.00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant",
+						"price-range"
+					],
+					"query": [
+						{
+							"key": "noOfRestaurants",
+							"value": "2"
+						},
+						{
+							"key": "noOfDishes",
+							"value": "2"
+						},
+						{
+							"key": "inequality",
+							"value": "LESS"
+						},
+						{
+							"key": "minPrice",
+							"value": "10.00"
+						},
+						{
+							"key": "maxPrice",
+							"value": "100.00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-by-open-time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/restaurant/open-time?date=MON&open_time=11:00:00&close_time=11:30:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"restaurant",
+						"open-time"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "MON"
+						},
+						{
+							"key": "open_time",
+							"value": "11:00:00"
+						},
+						{
+							"key": "close_time",
+							"value": "11:30:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

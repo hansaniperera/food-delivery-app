@@ -2,7 +2,6 @@ package com.example.fooddeliveryservice.repository;
 
 import com.example.fooddeliveryservice.entity.Menu;
 import com.example.fooddeliveryservice.entity.MenuProjection;
-import com.example.fooddeliveryservice.entity.RestaurantProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +24,6 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
     List<Integer> findByPriceRangeGreater(@Param("maxPrice") Double maxPrice, @Param("minPrice") Double minPrice,
                                    @Param("dishes") Integer dishes);
 
-    @Query("SELECT menu FROM Menu menu WHERE menu.dishName LIKE %:searchKey%)")
+    @Query("SELECT menu FROM Menu menu WHERE menu.dishName LIKE %:searchTerm%")
     List<MenuProjection> findBySearchTerm(@Param("searchTerm") String searchTerm);
 }

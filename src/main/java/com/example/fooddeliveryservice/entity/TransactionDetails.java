@@ -17,7 +17,7 @@ public class TransactionDetails {
     private Long id;
 
     @Column(name = "amount")
-    private String amount;
+    private Double amount;
 
     @Column(name = "added_date")
     private Date addedDate;
@@ -26,7 +26,7 @@ public class TransactionDetails {
     private String status;
 
     @Column(name = "description")
-    private Date description;
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
@@ -44,11 +44,11 @@ public class TransactionDetails {
         this.id = id;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -68,11 +68,11 @@ public class TransactionDetails {
         this.status = status;
     }
 
-    public Date getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Date description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
