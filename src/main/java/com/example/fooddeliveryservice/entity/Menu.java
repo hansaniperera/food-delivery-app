@@ -22,7 +22,7 @@ public class Menu {
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_name")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     public Long getId() {

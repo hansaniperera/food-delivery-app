@@ -4,6 +4,7 @@ import com.example.fooddeliveryservice.dto.ResponseDto;
 import com.example.fooddeliveryservice.dto.RestaurantDto;
 import com.example.fooddeliveryservice.enums.Days;
 import com.example.fooddeliveryservice.enums.Inequality;
+import com.example.fooddeliveryservice.service.MenuService;
 import com.example.fooddeliveryservice.service.RestaurantService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,11 @@ import java.time.LocalTime;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final MenuService menuService;
 
-    public RestaurantController(RestaurantService restaurantService) {
+    public RestaurantController(RestaurantService restaurantService, MenuService menuService) {
         this.restaurantService = restaurantService;
+        this.menuService = menuService;
     }
 
     // list of restaurants by open time
@@ -47,7 +50,7 @@ public class RestaurantController {
         ResponseDto responseDto = new ResponseDto();
         responseDto.setStatusCode(HttpStatus.OK.value());
         responseDto.setError(false);
-        responseDto.setBody(restaurantService.findByPriceRange(noOfRestaurants,noOfDishes,inequality, minPrice, maxPrice));
+        responseDto.setBody(menuService.findByPriceRange(noOfRestaurants,noOfDishes,inequality, minPrice, maxPrice));
         return responseDto;
     }
 

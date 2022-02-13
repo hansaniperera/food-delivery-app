@@ -11,7 +11,7 @@ public class RestaurantDto {
     private String restaurantName;
     @NotEmpty
     private Double cashBalance;
-    @NotEmpty
+//    @NotEmpty
     private List<Menu> menu;
 
     public String getRestaurantName() {

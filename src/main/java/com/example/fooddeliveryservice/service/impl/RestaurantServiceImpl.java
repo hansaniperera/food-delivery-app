@@ -1,12 +1,14 @@
 package com.example.fooddeliveryservice.service.impl;
 
+import com.example.fooddeliveryservice.dto.MenuDto;
+import com.example.fooddeliveryservice.dto.ResAndMenuDto;
 import com.example.fooddeliveryservice.dto.RestaurantDto;
-import com.example.fooddeliveryservice.entity.BusinessHours;
+import com.example.fooddeliveryservice.entity.MenuProjection;
 import com.example.fooddeliveryservice.entity.Restaurant;
+import com.example.fooddeliveryservice.entity.RestaurantProjection;
 import com.example.fooddeliveryservice.enums.Days;
-import com.example.fooddeliveryservice.enums.Inequality;
-import com.example.fooddeliveryservice.exception.CustomException;
 import com.example.fooddeliveryservice.repository.BusinessRepository;
+import com.example.fooddeliveryservice.repository.MenuRepository;
 import com.example.fooddeliveryservice.repository.RestaurantRepository;
 import com.example.fooddeliveryservice.service.RestaurantService;
 import org.springframework.beans.BeanUtils;
@@ -17,46 +19,50 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
     RestaurantRepository restaurantRepository;
     BusinessRepository businessRepository;
+    MenuRepository menuRepository;
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, BusinessRepository businessRepository) {
+    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, BusinessRepository businessRepository,
+                                 MenuRepository menuRepository) {
         this.restaurantRepository = restaurantRepository;
         this.businessRepository = businessRepository;
+        this.menuRepository = menuRepository;
     }
 
     @Transactional
-    public  List<Restaurant> findByOpenTime(Days date, LocalTime openTime, LocalTime closeTime){
+    public  List<RestaurantDto> findByOpenTime(Days date, LocalTime openTime, LocalTime closeTime){
 
-        List<Restaurant> restaurantList = new ArrayList<>();
+        List<RestaurantDto> restaurantList = new ArrayList<>();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        Optional<BusinessHours> businessHours = businessRepository.
+        List<RestaurantProjection> restaurants = businessRepository.
                 findByBusinessHours(date.toString(), openTime.format(formatter), closeTime.format(formatter));
 
-        if (businessHours.isPresent()) {
-           restaurantList.add(businessHours.map(BusinessHours::getRestaurant).orElseThrow(() -> new CustomException(432, "messageSource.getMessage(String.valueOf(ERROR_432)")));
+        for (RestaurantProjection restaurant : restaurants) {
+            RestaurantDto restaurantDto = new RestaurantDto();
+            restaurantDto.setRestaurantName(restaurant.getRestaurantName());
+            restaurantDto.setCashBalance(restaurant.getCashBalance());
+            restaurantList.add(restaurantDto);
         }
-
-
-        return restaurantList;
-
-    }
-
-    public List<Restaurant> findByPriceRange(Integer noOfRestaurants, Integer noOfDishes, Inequality inequality, Double minPrice, Double maxPrice){
-        List<Restaurant> restaurantList = new ArrayList<>();
         return restaurantList;
     }
 
-    public List<Restaurant> findByResNameAndDish(String searchTerm){
-        List<Restaurant> restaurantList = new ArrayList<>();
-        return restaurantList;
+
+
+    public ResAndMenuDto findByResNameAndDish(String searchTerm){
+        ResAndMenuDto resAndMenuDtos = new ResAndMenuDto();
+
+        List<RestaurantProjection> restaurantList = restaurantRepository.findBySearchTerm(searchTerm);
+        List<MenuProjection> menuList = menuRepository.findBySearchTerm(searchTerm);
+        resAndMenuDtos.setMenuProjections(menuList);
+        resAndMenuDtos.setRestaurantProjections(restaurantList);
+        return resAndMenuDtos;
     }
 
     public void addRestaurant(RestaurantDto restaurantDto) {
