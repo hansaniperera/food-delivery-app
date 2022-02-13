@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "business_hours")
@@ -16,17 +16,18 @@ public class BusinessHours {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "restaurant_id")
-    private Long restaurantName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
     @Column(name = "open_time")
-    private Date openTime;
+    private LocalTime openTime;
 
     @Column(name = "close_time")
-    private Date closeTime;
+    private LocalTime closeTime;
 
     @Column(name = "day")
-    private Date day;
+    private String day;
 
     public Long getId() {
         return id;
@@ -36,35 +37,35 @@ public class BusinessHours {
         this.id = id;
     }
 
-    public Long getRestaurantName() {
-        return restaurantName;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestaurantName(Long restaurantName) {
-        this.restaurantName = restaurantName;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
-    public Date getOpenTime() {
+    public LocalTime getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Date openTime) {
+    public void setOpenTime(LocalTime openTime) {
         this.openTime = openTime;
     }
 
-    public Date getCloseTime() {
+    public LocalTime getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Date closeTime) {
+    public void setCloseTime(LocalTime closeTime) {
         this.closeTime = closeTime;
     }
 
-    public Date getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(Date day) {
+    public void setDay(String day) {
         this.day = day;
     }
 }

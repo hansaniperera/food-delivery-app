@@ -29,7 +29,7 @@ public class PurchaseHistory {
     private Date transactionDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_name")
+    @JoinColumn(name = "customer_id")
     private User customer;
 
     public Long getId() {

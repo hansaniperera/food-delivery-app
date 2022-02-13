@@ -25,7 +25,16 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
-    List<Menu> menu;
+    private List<Menu> menu;
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    private List<BusinessHours> businessHours;
+
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    private List<TransactionDetails> transactionDetail;
+
 
     public Long getId() {
         return id;
@@ -51,12 +60,27 @@ public class Restaurant {
         this.cashBalance = cashBalance;
     }
 
-    public List<Menu> getMenus() {
+    public List<Menu> getMenu() {
         return menu;
     }
 
-    public void setMenus(List<Menu> menu) {
+    public void setMenu(List<Menu> menu) {
         this.menu = menu;
     }
 
+    public List<BusinessHours> getBusinessHours() {
+        return businessHours;
+    }
+
+    public void setBusinessHours(List<BusinessHours> businessHours) {
+        this.businessHours = businessHours;
+    }
+
+    public List<TransactionDetails> getTransactionDetail() {
+        return transactionDetail;
+    }
+
+    public void setTransactionDetail(List<TransactionDetails> transactionDetail) {
+        this.transactionDetail = transactionDetail;
+    }
 }
